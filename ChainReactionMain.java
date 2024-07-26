@@ -1,3 +1,6 @@
+//Aaron Brackett
+//CSC 222
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
