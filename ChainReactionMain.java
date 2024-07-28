@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-/**Enter your name here**/
+/** Logan St. John **/
 
 public class ChainReactionMain {
 
@@ -90,8 +90,35 @@ public class ChainReactionMain {
     }
 
     public static void cleanData(ArrayList<ArrayList<String>> wordSets){
-	/**Add Code here to clean dataset**/
-	    
+        ArrayList<ArrayList<String>> filteredWordSets = new ArrayList<>();
+        ArrayList<String> startingWords = new ArrayList<>();
+
+        // Save starting words to an Array
+        for(ArrayList<String> wordSet : wordSets) {
+            String startingWord = wordSet.get(0);
+            if (!startingWords.contains(startingWord)){
+                startingWords.add(startingWord);
+            }
+        }
+
+
+        // Filter word sets that don't have starting words
+        for(ArrayList<String> wordSet : wordSets) {
+            ArrayList<String> filteredSet = new ArrayList<>();
+            for (String word : wordSet) {
+                if (startingWords.contains(word)) {
+                    filteredSet.add(word);
+                }
+            }
+            // Add set to array if more than one word
+            if(filteredSet.size() > 1) {
+                filteredWordSets.add(filteredSet);
+            }
+        }
+
+        wordSets.clear();
+        wordSets.addAll(filteredWordSets);
+
         validate(wordSets);
     }
     public static void validate(ArrayList<ArrayList<String>> wordSets){
