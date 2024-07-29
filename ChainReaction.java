@@ -15,15 +15,6 @@ public class ChainReaction {
     ArrayList<String[]> chainWords = new ArrayList<>();
     Scanner input = new Scanner(System.in);
 
-    public ChainReaction(int guesses, int chainLength,ArrayList<ArrayList<String>> set){
-        this.guessCount = guesses;
-        this.chainLength = chainLength;
-        gameWords = new String[chainLength];
-        wordSets = set;
-        chainSet = false;
-        currentIndex = 1;
-    }
-
     public void playGame(){
         int guesses = 0;
 
@@ -68,58 +59,14 @@ public class ChainReaction {
         }
     }
 
-    public void getWords(){
 
-        int randomSet = new Random().nextInt(wordSets.size());
-        gameWords[0] = wordSets.get(randomSet).get(0);
-
-        String prevWord = gameWords[0];
-
-        prevWord = wordSets.get(randomSet).get(new Random().nextInt(wordSets.get(randomSet).size() - 1) + 1);
-        gameWords[1] = prevWord;
-
-        try{
-            for (int i = 2; i < gameWords.length; i++) {
-                boolean wordNeeded = true;
-                int attempts = 0;
-                while (wordNeeded) {
-                    for (int j = 0; j < wordSets.size(); j++) {
-                        if (prevWord.equals(wordSets.get(j).get(0))) {
-                            prevWord = wordSets.get(j).get(new Random().nextInt(wordSets.get(j).size() - 1) + 1);
-                            if (validateChain(prevWord, wordSets) || i == gameWords.length - 1) {
-                                gameWords[i] = prevWord;
-                                wordNeeded = false;
-                            }
-                        }
-                    }
-                    attempts++;
-                    if (attempts > 20) {
-                        throw new Exception("Unable to Complete Chain....Please Restart");
-                    }
-                }
-            }
-            chainSet = true;
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public void showChainWords(){
-        for (int i = 0; i < gameWords.length; i++) {
-            System.out.println(gameWords[i]);
-        }
-    }
-
-    public void createChain(){
-        chainWords.clear();
-        for (int i = 0; i < gameWords.length; i++) {
-            String[] letters = new String[gameWords[i].length()];
-            for (int j = 0; j < gameWords[i].length(); j++) {
-                letters[j] = "_";
-            }
-            chainWords.add(letters);
-        }
+    public ChainReaction(int guesses, int chainLength,ArrayList<ArrayList<String>> set){
+        this.guessCount = guesses;
+        this.chainLength = chainLength;
+        gameWords = new String[chainLength];
+        wordSets = set;
+        chainSet = false;
+        currentIndex = 1;
     }
 
     public void showChain(){
